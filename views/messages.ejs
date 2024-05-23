@@ -1,0 +1,47 @@
+<%- include('headerindex'); -%>
+        <main class="bg-danger-subtle">
+            <br>
+            <br>
+            <div class="container-fluid bg-danger col-md-4  text-center py-1 text-white rounded">
+                <h4 class="display-12">Messages!</h4>
+            </div>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded py-2">
+                <p class="text-center">
+                    Want to send a message or see message you've been sent?
+                </p>
+            </div>
+            <br>
+            <br>
+
+
+            <form class="container-fluid bg-dark-subtle rounded col-md-10 py-3" method="POST" action="/messages"  id="messageform" novalidate>
+                <div class="container mb-6" id="contact">
+                    <p class="fs-5"><b>Send A Message</b></p>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="username">Enter the name of who you would like to send a message to:</label>
+                                <input class="form-control" type="text" name="username" id="username" required>
+                            </div>
+                            <div class="col-md-12" id="username"><p>&nbsp;</p></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="message">Your message:</label>
+                                <textarea cols="30" rows="3" class="form-control" type="text" name="message" id="message" required></textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <p class="text-danger"><%= error %></p>
+                        <br>
+                        <br>
+                        <input type="submit" value="Submit" class="btn btn-danger">
+                        <input type="button" value="Reset" class="btn btn-danger" onclick="reset1()">
+                    </div>
+                </div>
+            </form>
+            <br>
+            <br>
+            <br>
+        </main>
+        <%- include('footer'); -%>

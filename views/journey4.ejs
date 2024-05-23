@@ -1,0 +1,54 @@
+<%- include('headerindex'); -%>
+        <main class="bg-danger-subtle">
+            <br>
+            <br>
+            <div class="container-fluid bg-danger col-md-4  text-center py-1 text-white rounded">
+                <h4 class="display-12">Welcome to the fourth stage of your journey!</h4>
+            </div>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded">
+                <p class="text-center"><strong>Stage 4 - SQLite3</strong></p>
+                <p class="text-center">Both storing users and messages!</p>
+            </div>
+            <br>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded">
+                <p class="text-center"><strong>Deep Dive:</strong></p>
+                <p>As per the norm, SQLite3 is declared at the top of our page!</p>
+                <code>let sqlite3 = require('sqlite3').verbose();<br>
+                    let db = new sqlite3.Database("HDTask");</code>
+                <br>
+                <br>
+                <p>The above code initialises our database in the db variable. We use sqlite3.Database("HDTask"); to select the HDTask database.</p>
+                <p>Here are some funs thing I used SQLite for:</p>
+                <code>if(req.session.userId) {<br>
+                    db.all('SELECT * FROM Users WHERE id = ?', [req.session.userId], (err, rows) => {<br>
+                        res.render('journey4', {title: "Journey Final Part", username: rows[0].username, points: rows[0].points });
+                </code>
+                <br>
+                <br>
+                <p>As previously mentioned, the if(req.session.userId) checks whether or not the user has an active session. If the user does, then we use the database variable we created earlier and ask it to SELECT every entry from the Users table where the id equals the active session user's ID.
+                    We then store the data gathered from this table in the rows variable. We are then able to render out this current webpage with your account name and points being included at the top of the page! The rows array should only be returning a single entry since this sytem was created without overlapping user ids.
+                    This means we can access the active user's username and points by calling the first entry in the rows array through rows[0], followed by the value we want. 
+                </p>
+                <code>db.run(`UPDATE Users SET points = points + ? WHERE id = ?`, [pointsToAdd, req.session.userId], (err) => {</code>
+                <br>
+                <br>
+                <p>I then run a similar code to the previous one but instead I UPDATE the table by increasing the points value by my pointsToAdd variable. I set the pointsToAdd variable to 10 at the top of my index.js file. With this, I'm able to increase the user's points everytime they view one of these journey pages. Check it out for yourself by reloading this page!</p>
+                <code>db.all('SELECT * FROM Users WHERE username = ? OR email = ?', [inputusername, inputemail], (err, rows) => {<br>
+                    if (rows.length > 0) {</code>
+                <p>I used the above code to error check a user's signup form to check whether or not the user's input &#40;inputusername and inputemail&#41; matches anything currently found within the database. If it does, the resultings rows length will be greater than 0. I can put this into an if statement to effectively error check. As if it returns false, I can return an error; and if it returns true, I can continue with validating the user's details.</p>
+                <code>db.all('SELECT Messages.message, Users.username FROM Messages JOIN Users ON Messages.user1id = Users.id WHERE Messages.user2id = ?', [req.session.userId], (err2, rows2) => {<br>
+                    res.render('viewmessages', {title: 'Your Messages', messages: rows2, username: rows1[0].username, points: rows1[0].points});</code>
+                <br>
+                <br>
+                <p>I can do additional things with SQL such as the above statement. The above statement is what I use in order to display messages the user has recieved. Effectively what I'm doing with the code is gathering messages and usernames from the messages table joined with the users table where the logged in user's ID matches the value that stores the userid who is the recipient for the message.</p>
+                <p>There are infinite more ways to use SQL code to perform operations but those were just a few examples of how I used it within this website. There will also be examples in the previous stages that you will now be able to look back upon.</p>
+                <br>
+                <strong><p class="text-center"><a href="/journeyfinal">Finish your journey!</a></p></strong>
+            </div>
+            <br>
+            <br>
+            <br>
+        </main>
+<%- include('footer'); -%>

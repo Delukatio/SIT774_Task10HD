@@ -1,0 +1,46 @@
+<%- include('headerindex'); -%>
+        <main class="bg-danger-subtle">
+            <br>
+            <br>
+            <div class="container-fluid bg-danger col-md-4  text-center py-1 text-white rounded">
+                <h4 class="display-12">Welcome to the second stage of your journey!</h4>
+            </div>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded">
+                <p class="text-center"><strong>Stage 2 - Bcrypt</strong></p>
+                <p class="text-center">Bcrypt ensures the security of you passwords!</p>
+            </div>
+            <br>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded">
+                <p class="text-center"><strong>Deep Dive:</strong></p>
+                <p>Obviously, as Bcrypt is a library we must declare it at the top of our index.js code!</p>
+                <code>const bcrypt = require('bcrypt');<br>
+                    const saltRounds = 10;<br>
+                </code>
+                <br>
+                <p>The saltRounds variable is created now as we will use it later and declaring it at the top simplifies the code, especially if you decide to hash multiple things.</p>
+                <code>bcrypt.hash(inputpassword, saltRounds, (err, hash) => { }));</code>
+                <br>
+                <br>
+                <p>The above command is how we hash variables. Bcrypt.hash initialises the hashing function and we pass in two variables, inputpassword and saltRounds. inputpassword in this case is a field we gathered from an input form the user filled in.
+                    saltRounds refers to the variable of 10 we created earlier. The function then returns both/either an error and a hash. This hash variable we can then insert into a database.
+                </p>
+                <code>let stmt = db.run('INSERT INTO Users (username, password) VALUES (?, ?)', [inputusername, hash], function(err) {</code>
+                <br>
+                <br>
+                <p>As you can see in the above code, we submit both the user's username and their hashed password into the database. </p>
+                <p>The above code also utilises paramatters in a similar vein to prepared statements. In simple terms, we use the two questions marks (?) in the code as a substituion that we later replace with our actual values. This helps prevent basic SQL injection techniques where bad actors can insert SQL code into fields by using '' to break the code. </p>
+                <code>bcrypt.compare(inputpassword, hashedPassword, (err, result) => {</code>
+                <br>
+                <br>
+                <p>We are then able to use bcrypt once again within the login code. The above code uses bcrypt to compare the password the user entered with the password that bcrypt encrypted. If the result returns true, then we are able to create the user's session.</p>
+                <p>As you can see from the above example, I can constantly sent the active user's details to any page I desire, including this one!</p>
+                <br>
+                <strong><p class="text-center"><a href="/journeythree">Continue your journey!</a></p></strong>
+            </div>
+            <br>
+            <br>
+            <br>
+        </main>
+<%- include('footer'); -%>

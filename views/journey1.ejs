@@ -1,0 +1,68 @@
+<%- include('headerindex'); -%>
+        <main class="bg-danger-subtle">
+            <br>
+            <br>
+            <div class="container-fluid bg-danger col-md-4  text-center py-1 text-white rounded">
+                <h4 class="display-12">Welcome to the first stage of your journey!</h4>
+            </div>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded">
+                <p class="text-center"><strong>Stage 1 - Express-Session</strong></p>
+                <p class="text-center">Express-Session is the entire reason you are currently able to even view this page!</p>
+            </div>
+            <br>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded">
+                <p class="text-center"><strong>Deep Dive:</strong></p>
+                <p>As per the norm, express-session is a library, meaning we must declare it at the top of our index.js code!</p>
+                <code>const session = require('express-session');</code>
+                <br>
+                <br>
+                <p>A session is then inititalised using the following code:</p>
+                <code>app.use(session({<br>
+                    secret: 'mysupersecretcodehere',<br>
+                    resave: false,<br>
+                    saveUninitialized: true,<br>
+                }));</code>
+                <br>
+                <br>
+                <p>With secret being used to sign the session ID's cookie, resave involving whether to constantly save the session upon each request, and saveUnitialized, which dictates whether a session that is new but not modified should be saved.</p>
+                <p>After confirming that the user has entered valid details, the index.js file will immediately run the following command:</p>
+                <code>req.session.userId = rows[0].id;<br>
+                    req.session.save();</code>
+                <br>
+                <br>
+                <p>This results in a cookie being created that is stored within the client's browser. This cookie is however, merely an identifier, and the actual session information is stored on the server! The session is identified by the user's unique ID.</p>
+                <p>This allows me to use:</p>
+                <code>if(req.session.userId)</code>
+                <br>
+                <br>
+                <p>The above code results in a true variable being passed if a session is found. Using this, I can easily block non-signed in users from accessing certain pages!</p>
+                <code>app.get('/signup', (req, res, next) => {<br>
+                    if(req.session.userId) {<br>
+                        res.redirect('/profile')<br>
+                    }<br>
+                    else<br>
+                    {<br>
+                        res.render('signup', { title: "Sign Up", error: ""});<br>
+                    }<br>
+                });</code>
+                <br>
+                <br>
+                <p>Using the above code, I am able to allow access to the signup page to only those users who are not already signed in! You can try this for yourself by attemping to visit /signup. I know this won't work because I used the same code to stop non-signed in users from even accessing this page!</p>
+                <p>Express-Session is also the entire reason I am able to continually load your username and points in the navbar, no matter which page you visit. I am able to do this as I can constantly easily refer to your database details since your session's ID is the same as your account detail's ID in my database!</p>
+                <br>
+                <code>db.all('SELECT * FROM Users WHERE id = ?', [req.session.userId], (err, rows) => {<br>
+                    res.render('profile', {title: "Welcome", userId: rows[0].id, username: rows[0].username, points: rows[0].points });
+                </code>
+                <br>
+                <br>
+                <p>As you can see from the above example, I can constantly sent the active user's details to any page I desire, including this one!</p>
+                <br>
+                <strong><p class="text-center"><a href="/journeytwo">Continue your journey!</a></p></strong>
+            </div>
+            <br>
+            <br>
+            <br>
+        </main>
+<%- include('footer'); -%>

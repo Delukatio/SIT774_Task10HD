@@ -1,0 +1,45 @@
+<%- include('header'); -%>
+        <main class="bg-danger-subtle">
+            <br>
+            <br>
+            <div class="container-fluid bg-danger col-md-4  text-center py-1 text-white rounded">
+                <h4 class="display-12">Login!</h4>
+            </div>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded py-2">
+                <p class="text-center">
+                    Already made an account? Enter your login details below!
+                </p>
+            </div>
+            <br>
+            <br>
+            <form class="container-fluid bg-dark-subtle rounded col-md-10 py-3" method="POST" action="/login"  id="loginform" novalidate>
+                <div class="container mb-6" id="contact">
+                    <p class="fs-5"><b>Login</b></p>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input class="form-control" type="text" name="username" id="username" required>
+                            </div>
+                            <div class="col-md-12" id="username"><p>&nbsp;</p></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input class="form-control" type="password" name="password" id="password" required>
+                            </div>
+                        </div>
+                        <br>
+                        <p class="text-danger"><%= error %></p>
+                        <br>
+                        <br>
+                        <input type="submit" value="Submit" class="btn btn-danger">
+                        <input type="button" value="Reset" class="btn btn-danger" onclick="reset1()">
+                    </div>
+                </div>
+            </form>
+            <br>
+            <br>
+            <br>
+        </main>
+        <%- include('footer'); -%>

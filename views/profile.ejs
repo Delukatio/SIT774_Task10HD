@@ -1,0 +1,29 @@
+<%- include('headerindex'); -%>
+        <main class="bg-danger-subtle">
+            <br>
+            <br>
+            <div class="container-fluid bg-danger col-md-4  text-center py-1 text-white rounded">
+                <h4 class="display-12">Welcome to your profile!</h4>
+            </div>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded">
+                <p class="text-center">Welcome <strong><%= username %></strong> to your profile!</p>
+                <p class="text-center">You can't do much currently on this website, but what you can do is change or add details to your profile!</p>
+            </div>
+            <br>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded">
+                <p class="text-center"><strong>Current details:</strong></p>
+                <ul>
+                    <li>Username: <%= username %></li>
+                    <li>Email: <%= email %></li>
+                    <li>Points: <%= points %></li>
+                </ul>
+                <p class="text-center">You can't do much currently on this website, but what you can do is go on a journey and learn about the new additions!</p>
+                <p class="text-center"><a href="/startjourney">Start your journey!</a></p>
+            </div>
+            <br>
+            <br>
+            <br>
+        </main>
+<%- include('footer'); -%>

@@ -1,0 +1,26 @@
+<%- include('headerindex'); -%>
+<main>
+    <br>
+    <br>
+    <div class="container">
+        <p>These are the current messages you've recieved:</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>From</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% comments.forEach(comment => { %>
+                    <tr>
+                        <td><%= comment.password %></td>
+                        <td><%= comment.points %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<%- include('footer'); -%>

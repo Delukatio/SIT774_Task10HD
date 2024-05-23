@@ -1,0 +1,60 @@
+<%- include('headerindex'); -%>
+        <main class="bg-danger-subtle">
+            <br>
+            <br>
+            <div class="container-fluid bg-danger col-md-4  text-center py-1 text-white rounded">
+                <h4 class="display-12">Welcome to the third stage of your journey!</h4>
+            </div>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded">
+                <p class="text-center"><strong>Stage 3 - Nodemailer</strong></p>
+                <p class="text-center">Nodemailer ensures each user is welcome to the site!</p>
+            </div>
+            <br>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded">
+                <p class="text-center"><strong>Deep Dive:</strong></p>
+                <p>Once again, Nodemailer is declared atop our file!</p>
+                <code>const nodemailer = require('nodemailer');</code>
+                <br>
+                <code>const transporter = nodemailer.createTransport({<br>
+                    service: 'EMAILPROVIDERHERE',<br>
+                    auth: {<br>
+                    user: 'EMAILHERE',<br>
+                    pass: 'PASSWORDHERE'<br>
+                }
+                });</code>
+                <br>
+                <br>
+                <p>The above code initialises the 'transport' i.e. where any emails sent from the website will come from. For instance, if I put my email of lukastjepanovic@outlook.com in the user field, any emails sent will come from that address. The password field involves your email's password and the service field includes your Email provider (e.g. Gmail, Outlook).
+                </p>
+                <p>One thing to not however, is that you will most likely require an 'app password' to integrate this feature yourself. Both my Outlook and Google accounts have 2FA enabled so to allow this feature to work I had to create an 'app password'. This app password is a password used solely for this program and enables it to send an email through my account. It is best to keep it confidential though since anyone with knowledge on it can abuse it.</p>
+                <p>Next up we need to create the send email function!</p>
+                <code>function sendWelcomeEmail(email, username) {<br>
+                    const mailOptions = {<br>
+                        from: 'luka0904stjepanovic@gmail.com',<br>
+                        to: email,<br>
+                        subject: 'Welcome to my small account system!',<br>
+                        text: `Hi ${username},\n\n Thanks so much for checking out my account project.\nI wasn't originally intending to include email confirmation but I thought eh, might as well add it! \n\nKind Regards,\nLuka Stjepanovic (Owner)`,<br>
+                        html: `&lt;p&gt;Hi ${username},&lt;/p&gt;&lt;p&gt;Thanks so much for checking out my account project.&lt;/p&gt;&lt;p&gt;I wasn't originally intending to include email confirmation but I thought eh, might as well add it!&lt;/p&gt;&lt;p&gt;Kind Regards,&lt;br&gt;Luka Stjepanovic (Owner)&lt;/p&gt;`<br>
+                    };<br>
+                    transporter.sendMail(mailOptions);
+                </code>
+                <br>
+                <br>
+                <p>The above code effectively creates/loads the information for an email and subsequently sends it off through the creation of a function! As I am using my personal email to send the welcome emails, I included by personal email as the from. The function itself takes in both an email and a username, which we then use to fill out where the email shoudl go
+                    as well as allowing us to refer to the user in the email. The subject, text and html are all textual data that will be visible in the email. (With HTML loading by the default unless the user specifically opens the email as plaintext.)
+                </p>
+                <p>The transporter we created earlier then uses it's sendMail method and we pass through our 'mailoptions' variable. This effectively results in our email being sent.</p>
+                <code>sendWelcomeEmail(inputemail, inputusername);</code>
+                <br>
+                <br>
+                <p>We then call the above function after we confirm the user's account has been created. The user will now recieve validation of their account's creation through an email soon after.</p>
+                <br>
+                <strong><p class="text-center"><a href="/journeyfour">Continue your journey!</a></p></strong>
+            </div>
+            <br>
+            <br>
+            <br>
+        </main>
+<%- include('footer'); -%>

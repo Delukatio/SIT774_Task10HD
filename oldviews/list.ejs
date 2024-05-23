@@ -1,0 +1,46 @@
+<%- include('header'); -%>
+
+<header>
+  <div class="container-fluid bg-info-subtle mb-4">
+      <div class="col-sm-8 mx-auto text-center py-2">
+          <h1 class="display-4">World of Ice Cream</h1>
+          <p class="lead ">Feedback from ice cream lovers....</p>
+      </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1>&#x1F366; <%= title %></h1>
+    <p>
+      Here are some examples of User's feedback on Icecream flavours!
+    </p>
+    <ul>
+        <ul>
+            <% for (let i = 0; i < comments.length ; i++) { %>
+                <div class="container bg-info-subtle py-4 rounded">
+                  <img src="<%= users[comments[i].uid].image %>" class="rounded-circle" width="130px">
+                  <h4><%= users[comments[i].uid].name %></h4>
+                  <h6><%= types[comments[i].tid].name %></h6>
+                  <% for (let l = 0; l < comments[i].rating; l++) { %>
+                    &#9733;
+                  <% } %>
+                  <br>
+                  <%= comments[i].text %>
+                  <br>
+                  <br>
+                  <p class="text-secondary"><%= comments[i].posted %></p>
+                </div>
+                <br>
+            <% } %>
+        </ul>
+      </ul>
+    <p class="mt-5">
+      Thank you for visiting, this page was generated on 
+      <% const now = new Date(); %>
+      <%= now.toLocaleString(); %>
+    </p>
+  </div>
+</main>
+
+<%- include('footer'); -%>

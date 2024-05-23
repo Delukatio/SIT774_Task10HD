@@ -1,0 +1,44 @@
+<%- include('header'); -%>
+
+<header>
+  <div class="container-fluid bg-info-subtle mb-4">
+      <div class="col-sm-8 mx-auto text-center py-2">
+          <h1 class="display-4">World of Ice Cream</h1>
+          <p class="lead ">Feedback from ice cream lovers....</p>
+      </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1>&#x1F366; <%= title %></h1>
+    <p>
+      Welcome to the <%= title %> website. Here you will find some 
+      useful information and data on people's experience with ice cream!  
+    </p>
+    <p>
+      Please click on the links below to obtain some data either in raw JSON form
+      or as a rendered dynamic page.
+    </p>
+
+    <h6>JSON Data</h6>
+    <ul>
+      <li><a href="/users">Users</a></li>
+      <li><a href="/icecreamtypes">Ice Cream Types</a></li>
+      <li><a href="/comments">User Comments</a></li>
+    </ul>
+
+    <h6>Dynamic Response Pages</h6>
+    <ul>
+      <li><a href="/feedback">User Feedback</a></li>
+    </ul>
+
+    <p class="mt-5">
+      Thank you for visiting, this page was generated on 
+      <% const now = new Date(); %>
+      <%= now.toLocaleString(); %>
+    </p>
+  </div>
+</main>
+
+<%- include('footer'); -%>

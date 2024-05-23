@@ -1,0 +1,38 @@
+<%- include('headerindex'); -%>
+        <main class="bg-danger-subtle">
+            <br>
+            <br>
+            <div class="container-fluid bg-danger col-md-4  text-center py-1 text-white rounded">
+                <h4 class="display-12">Your Messages!</h4>
+            </div>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded py-2">
+                <p class="text-center">
+                    You have recieved the following messages!
+                </p>
+            </div>
+            <br>
+            <br>
+            <div class="container-fluid bg-dark-subtle col-md-10 rounded py-2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% messages.forEach(message => { %>
+                            <tr>
+                                <td><%= message.username %></td>
+                                <td><%= message.message %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <br>
+            <br>
+        </main>
+        <%- include('footer'); -%>
